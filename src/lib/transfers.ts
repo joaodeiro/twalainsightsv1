@@ -84,7 +84,7 @@ export function validateTransfer(
       switch (transaction.type) {
         case 'BUY':
           const fees = transaction.fees || 0
-          const totalCost = (transaction.quantity * transaction.price) + fees
+          const totalCost = (transaction.quantity * (transaction.unitPrice || transaction.price || 0)) + fees
           quantity += transaction.quantity
           totalInvested += totalCost
           break
@@ -133,7 +133,7 @@ export function validateTransfer(
       switch (transaction.type) {
         case 'BUY':
           const fees = transaction.fees || 0
-          const totalCost = (transaction.quantity * transaction.price) + fees
+          const totalCost = (transaction.quantity * (transaction.unitPrice || transaction.price || 0)) + fees
           destinationCurrentQuantity += transaction.quantity
           destinationCurrentInvested += totalCost
           break

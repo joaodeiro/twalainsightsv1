@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useAuth } from '@/contexts/AuthContext'
 import { useEffect, useState } from 'react'
-import { ThemeToggle } from './ThemeToggle'
+// import { ThemeToggle } from './ThemeToggle' // Temporariamente desabilitado para deploy
 
 export function Header() {
   const [mounted, setMounted] = useState(false)
@@ -25,7 +25,7 @@ export function Header() {
             </div>
             <nav className="hidden md:flex items-center space-x-8">
               <div className="flex items-center space-x-4">
-                <ThemeToggle />
+                {/* <ThemeToggle /> */}
                 <Link href="/login" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                   Entrar
                 </Link>
@@ -73,7 +73,7 @@ export function Header() {
                     Insights
                   </Link>
                   <div className="flex items-center space-x-4">
-                    <ThemeToggle />
+                    {/* <ThemeToggle /> */}
                     <span className="text-sm text-gray-600 dark:text-gray-400">
                       Olá, {user.user_metadata?.name || 'Usuário'}
                     </span>
@@ -88,7 +88,7 @@ export function Header() {
               ) : (
                 <>
                   <div className="flex items-center space-x-4">
-                    <ThemeToggle />
+                    {/* <ThemeToggle /> */}
                     <Link href="/login" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                       Entrar
                     </Link>

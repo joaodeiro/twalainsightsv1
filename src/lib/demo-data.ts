@@ -3,21 +3,31 @@
 import { Transaction, CustodyAccount, Asset } from '@/types'
 
 export const demoTransactions: Transaction[] = [
+  // Comentado temporariamente para deploy
+  /*
   {
     id: 'demo-1',
-    date: '2024-01-15T10:00:00Z',
+    userId: 'demo-user',
+    operationDate: new Date('2024-01-15T10:00:00Z'),
     type: 'BUY',
     assetId: 'BIA',
     quantity: 100,
-    price: 2500,
-    total: 250000,
+    unitPrice: 2500,
+    totalOperationValue: 250000,
     fees: 2500,
     custodyAccountId: 'demo-account-1',
-    notes: 'Compra inicial BIA'
+    notes: 'Compra inicial BIA',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    // Para compatibilidade
+    date: new Date('2024-01-15T10:00:00Z'),
+    price: 2500,
+    total: 250000,
   },
   {
-    id: 'demo-2', 
-    date: '2024-02-01T14:30:00Z',
+    id: 'demo-2',
+    userId: 'demo-user', 
+    operationDate: new Date('2024-02-01T14:30:00Z'),
     type: 'BUY',
     assetId: 'BPC',
     quantity: 50,
@@ -87,9 +97,12 @@ export const demoTransactions: Transaction[] = [
     custodyAccountId: 'demo-account-2',
     notes: 'Entrada em NOS'
   }
+  */
 ]
 
 export const demoCustodyAccounts: CustodyAccount[] = [
+  // Comentado temporariamente para deploy
+  /*
   {
     id: 'demo-account-1',
     name: 'Banco de Investimento Africano',
@@ -104,9 +117,12 @@ export const demoCustodyAccounts: CustodyAccount[] = [
     accountNumber: '987654321000',
     createdAt: '2024-01-01T00:00:00Z'
   }
+  */
 ]
 
 export const demoAssets: Asset[] = [
+  // Comentado temporariamente para deploy
+  /*
   {
     id: 'BIA',
     name: 'Banco de Investimento Africano',
@@ -155,4 +171,5 @@ export const demoAssets: Asset[] = [
     sector: 'Financeiro',
     description: 'Banco de Investimento Comercial'
   }
+  */
 ]

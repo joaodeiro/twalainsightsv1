@@ -72,7 +72,7 @@ export function calculatePortfolioStats(
   
   // Ordenar transações por data (mais antigas primeiro)
   const sortedTransactions = transactions.sort((a, b) => 
-    new Date(a.date).getTime() - new Date(b.date).getTime()
+    new Date(a.operationDate || a.date || Date.now()).getTime() - new Date(b.operationDate || b.date || Date.now()).getTime()
   )
   
   sortedTransactions.forEach(transaction => {
@@ -111,7 +111,7 @@ export function calculatePortfolioStats(
         // Compra: INTEGRAR TAXAS conforme documento
         // "Custo Total da Compra = (Quantidade * Preço) + Custos/Taxas"
         const fees = transaction.fees || 0
-        const totalCostWithFees = (transaction.quantity * transaction.price) + fees
+        const totalCostWithFees = (transaction.quantity * (transaction.unitPrice || transaction.price || 0)) + fees
         
         const newQuantity = position.quantity + transaction.quantity
         const newTotalInvested = position.totalInvested + totalCostWithFees
@@ -127,7 +127,7 @@ export function calculatePortfolioStats(
         // "Valor Total da Venda = (Quantidade * Preço) - Custos/Taxas"
         if (position.quantity >= transaction.quantity) {
           const fees = transaction.fees || 0
-          const grossSaleValue = transaction.quantity * transaction.price
+          const grossSaleValue = transaction.quantity * (transaction.unitPrice || transaction.price || 0)
           const netSaleValue = grossSaleValue - fees
           
           const soldRatio = transaction.quantity / position.quantity
@@ -149,7 +149,7 @@ export function calculatePortfolioStats(
       case 'DIVIDEND':
       case 'INTEREST':
         // Proventos: adicionar ao income (não afeta quantidade)
-        position.totalIncome += transaction.total
+        position.totalIncome += (transaction.totalOperationValue || transaction.total || 0)
         break
     }
   })
@@ -200,8 +200,8 @@ export function calculatePortfolioStats(
   const buyTransactions = transactions.filter(t => t.type === 'BUY')
   const sellTransactions = transactions.filter(t => t.type === 'SELL')
   
-  totalInvested = buyTransactions.reduce((sum, t) => sum + t.total, 0)
-  totalSold = sellTransactions.reduce((sum, t) => sum + t.total, 0)
+  totalInvested = buyTransactions.reduce((sum, t) => sum + (t.totalOperationValue || t.total || 0), 0)
+  totalSold = sellTransactions.reduce((sum, t) => sum + (t.totalOperationValue || t.total || 0), 0)
 
   // 5. CALCULAR RETORNO PERCENTUAL TOTAL
   // Retorno total inclui: lucro não realizado + lucro realizado + proventos

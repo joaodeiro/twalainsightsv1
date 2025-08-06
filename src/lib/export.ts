@@ -115,9 +115,9 @@ export async function exportTransactionsToCSV(
       'Ativo': asset?.name || 'N/A',
       'Ticker': asset?.ticker || 'N/A',
       'Quantidade': transaction.quantity.toString(),
-      'Preço': formatCurrency(transaction.price),
+      'Preço': formatCurrency(transaction.unitPrice || transaction.price || 0),
       'Taxas': formatCurrency(transaction.fees || 0),
-      'Total': formatCurrency(transaction.total),
+      'Total': formatCurrency(transaction.totalOperationValue || transaction.total || 0),
       'Conta': account?.accountNickname || account?.name || 'N/A',
       'Corretora': account?.brokerName || account?.institution || 'N/A',
       'Notas': transaction.notes || ''
@@ -158,7 +158,7 @@ export async function exportPortfolioToCSV(
       a.id === assetTransactions[0]?.custodyAccountId
     )
     
-    const currentValue = position.quantity * asset?.currentPrice || 0
+    const currentValue = position.quantity * (asset?.currentPrice || 0)
     const profit = currentValue - position.totalInvested + position.realizedProfit
     const returnPercent = position.totalInvested > 0 
       ? (profit / position.totalInvested) * 100 
@@ -222,8 +222,8 @@ export async function exportTransactionsToPDF(
       getTransactionTypeLabel(transaction.type),
       asset?.ticker || 'N/A',
       transaction.quantity.toString(),
-      formatCurrency(transaction.price),
-      formatCurrency(transaction.total),
+              formatCurrency(transaction.unitPrice || transaction.price || 0),
+      formatCurrency(transaction.totalOperationValue || transaction.total || 0),
       account?.accountNickname || account?.name || 'N/A'
     ]
   })

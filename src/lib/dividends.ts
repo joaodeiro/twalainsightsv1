@@ -83,10 +83,11 @@ export function consolidateDividendsByAsset(
     }
     
     // Atualizar valores
+    const effectiveTotal = transaction.totalOperationValue || transaction.total || 0
     if (transaction.type === 'DIVIDEND') {
-      summary.totalDividendsReceived += transaction.total
+      summary.totalDividendsReceived += effectiveTotal
     } else {
-      summary.totalInterestReceived += transaction.total
+      summary.totalInterestReceived += effectiveTotal
     }
     
     if (transaction.bonusQuantity) {
@@ -96,7 +97,7 @@ export function consolidateDividendsByAsset(
     summary.paymentsCount++
     
     // Atualizar última data de pagamento
-    const paymentDate = transaction.paymentDate || transaction.date
+    const paymentDate = transaction.paymentDate || transaction.operationDate || transaction.date || new Date()
     if (!summary.lastPaymentDate || paymentDate > summary.lastPaymentDate) {
       summary.lastPaymentDate = paymentDate
     }
@@ -115,7 +116,7 @@ export function consolidateDividendsByAsset(
       summary.yearlyBreakdown.push(yearBreakdown)
     }
     
-    yearBreakdown.totalValue += transaction.total
+    yearBreakdown.totalValue += effectiveTotal
     yearBreakdown.paymentsCount++
   })
   
@@ -143,17 +144,19 @@ export function transactionToDividend(transaction: Transaction): Dividend | null
     return null
   }
   
+  const effectiveTotal = transaction.totalOperationValue || transaction.total || 0
+  
   return {
     id: transaction.id,
     userId: transaction.userId,
     custodyAccountId: transaction.custodyAccountId,
     assetId: transaction.assetId,
     type: transaction.type === 'DIVIDEND' ? 'DIVIDEND' : 'INTEREST',
-    paymentDate: transaction.paymentDate || transaction.date,
-    recordDate: transaction.recordDate || transaction.date,
-    valuePerUnit: transaction.valuePerUnit || (transaction.total / transaction.quantity),
+    paymentDate: transaction.paymentDate || transaction.operationDate || transaction.date || new Date(),
+    recordDate: transaction.recordDate || transaction.operationDate || transaction.date || new Date(),
+    valuePerUnit: transaction.valuePerUnit || (effectiveTotal / transaction.quantity),
     affectedQuantity: transaction.quantity,
-    totalValue: transaction.total,
+    totalValue: effectiveTotal,
     bonusQuantity: transaction.bonusQuantity,
     description: transaction.notes || `${transaction.type} recebido`,
     source: transaction.source || transaction.broker || 'Não informado',

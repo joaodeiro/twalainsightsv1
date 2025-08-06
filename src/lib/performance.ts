@@ -87,7 +87,7 @@ export function calculatePeriodPerformance(
 
   // Filtrar transações do período
   const periodTransactions = transactions.filter(t => 
-    isAfter(new Date(t.date), startDate)
+    isAfter(new Date(t.operationDate || t.date || Date.now()), startDate)
   )
 
   // Calcular estatísticas da carteira
@@ -96,7 +96,7 @@ export function calculatePeriodPerformance(
   // Calcular dividendos recebidos no período
   const dividendsReceived = periodTransactions
     .filter(t => t.type === 'DIVIDEND' || t.type === 'INTEREST')
-    .reduce((sum, t) => sum + t.total, 0)
+    .reduce((sum, t) => sum + (t.totalOperationValue || t.total || 0), 0)
 
   // Calcular ganhos realizados no período (vendas)
   const realizedGains = periodTransactions
@@ -109,7 +109,7 @@ export function calculatePeriodPerformance(
       const position = portfolioStats.positions.find(p => p.assetId === t.assetId)
       if (!position) return sum
       
-      const gainPerUnit = t.price - position.averagePrice
+      const gainPerUnit = (t.unitPrice || t.price || 0) - position.averagePrice
       return sum + (gainPerUnit * t.quantity)
     }, 0)
 
@@ -223,7 +223,7 @@ export function generateTimeSeriesData(
     
     // Filtrar transações até esta data
     const transactionsUpToDate = transactions.filter(t => 
-      !isAfter(new Date(t.date), currentDate)
+      !isAfter(new Date(t.operationDate || t.date || Date.now()), currentDate)
     )
     
     if (transactionsUpToDate.length === 0) {
