@@ -62,9 +62,11 @@ export function AssetOverview({ transactions }: AssetOverviewProps) {
         }
       }
       
+      const effectiveTotal = transaction.totalOperationValue || transaction.total || 0
+      
       if (transaction.type === 'BUY') {
         acc[assetId].totalQuantity += transaction.quantity
-        acc[assetId].totalInvested += transaction.total
+        acc[assetId].totalInvested += effectiveTotal
       } else if (transaction.type === 'SELL') {
         // Para vendas, calcular o valor investido proporcional
         const currentAveragePrice = acc[assetId].totalQuantity > 0 
@@ -72,7 +74,7 @@ export function AssetOverview({ transactions }: AssetOverviewProps) {
           : 0
         
         const soldInvestedValue = currentAveragePrice * transaction.quantity
-        const soldRevenue = transaction.total // Receita da venda (após taxas)
+        const soldRevenue = effectiveTotal // Receita da venda (após taxas)
         
         acc[assetId].totalQuantity -= transaction.quantity
         acc[assetId].totalInvested -= soldInvestedValue

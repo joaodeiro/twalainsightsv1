@@ -102,16 +102,16 @@ export function adjustHistoricalPrices(
         case 'SPLIT':
           // Ajustar quantidade e preço
           adjustedTransaction.quantity = transaction.quantity * event.quantityFactor
-          adjustedTransaction.price = transaction.price / event.quantityFactor
-          adjustedTransaction.unitPrice = transaction.unitPrice / event.quantityFactor
+          adjustedTransaction.price = (transaction.price || 0) / event.quantityFactor
+          adjustedTransaction.unitPrice = (transaction.unitPrice || transaction.price || 0) / event.quantityFactor
           // Total permanece o mesmo
           break
 
         case 'REVERSE_SPLIT':
           // Ajustar quantidade e preço (inverso do split)
           adjustedTransaction.quantity = transaction.quantity / event.quantityFactor
-          adjustedTransaction.price = transaction.price * event.quantityFactor
-          adjustedTransaction.unitPrice = transaction.unitPrice * event.quantityFactor
+          adjustedTransaction.price = (transaction.price || 0) * event.quantityFactor
+          adjustedTransaction.unitPrice = (transaction.unitPrice || transaction.price || 0) * event.quantityFactor
           // Total permanece o mesmo
           break
 

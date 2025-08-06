@@ -274,7 +274,7 @@ export function generateAuditReport(
   // Gerar estatísticas
   const actionSummary: Record<AuditAction, number> = {
     CREATE: 0, UPDATE: 0, DELETE: 0, CALCULATE: 0, ADJUST: 0,
-    TRANSFER: 0, VALIDATE: 0, APPROVE: 0, REJECT: 0
+    TRANSFER: 0, VALIDATE: 0, APPROVE: 0, REJECT: 0, EXECUTE: 0
   }
 
   const entitySummary: Record<AuditEntityType, number> = {

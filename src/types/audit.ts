@@ -3,7 +3,7 @@
 export type AuditAction = 
   | 'CREATE' | 'UPDATE' | 'DELETE'
   | 'CALCULATE' | 'ADJUST' | 'TRANSFER'
-  | 'VALIDATE' | 'APPROVE' | 'REJECT'
+  | 'VALIDATE' | 'APPROVE' | 'REJECT' | 'EXECUTE'
 
 export type AuditEntityType = 
   | 'TRANSACTION' | 'PROVENTO' | 'CORPORATE_EVENT'

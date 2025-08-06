@@ -81,7 +81,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
     }
-  }, [user, syncWithSupabase])
+  }, [user])
 
   // Funções de localStorage
   const saveToLocalStorage = () => {
@@ -197,12 +197,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
           const newAccount: CustodyAccount = {
             id: data[0].id,
             userId: data[0].user_id,
-            name: data[0].name,
-            institution: data[0].institution,
+            brokerName: data[0].broker_name || data[0].institution,
+            accountNickname: data[0].account_nickname || data[0].name,
             accountNumber: data[0].account_number,
             isActive: data[0].is_active,
             createdAt: new Date(data[0].created_at),
             updatedAt: new Date(data[0].updated_at),
+            // Para compatibilidade
+            name: data[0].name,
+            institution: data[0].institution,
           }
 
           // Atualizar estado local
@@ -221,12 +224,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const newAccount: CustodyAccount = {
         id: tempId,
         userId: user.id,
-        name: account.name,
-        institution: account.institution,
+        brokerName: account.brokerName || '',
+        accountNickname: account.accountNickname || '',
         accountNumber: account.accountNumber,
         isActive: account.isActive ?? true,
         createdAt: new Date(),
         updatedAt: new Date(),
+        // Para compatibilidade
+        name: account.name,
+        institution: account.institution,
       }
 
       setCustodyAccounts(prev => [newAccount, ...prev])
@@ -412,12 +418,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const accounts: CustodyAccount[] = data.map(item => ({
       id: item.id,
       userId: item.user_id,
-      name: item.name,
-      institution: item.institution,
+      brokerName: item.broker_name || item.institution,
+      accountNickname: item.account_nickname || item.name,
       accountNumber: item.account_number,
       isActive: item.is_active,
       createdAt: new Date(item.created_at),
       updatedAt: new Date(item.updated_at),
+      // Para compatibilidade
+      name: item.name,
+      institution: item.institution,
     }))
 
     console.log('🏦 AppContext: Contas processadas:', accounts)
@@ -451,14 +460,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
       assetId: item.asset_id,
       type: item.type,
       quantity: item.quantity,
-      price: item.price,
-      date: new Date(item.date),
-      total: item.total,
-      broker: item.broker,
+      unitPrice: item.unit_price || item.price,
+      operationDate: new Date(item.operation_date || item.date),
+      totalOperationValue: item.total_operation_value || item.total,
       fees: item.fees,
+      broker: item.broker,
       notes: item.notes,
       createdAt: new Date(item.created_at),
       updatedAt: new Date(item.updated_at),
+      // Para compatibilidade
+      price: item.price,
+      date: new Date(item.date),
+      total: item.total,
     }))
 
     console.log('AppContext: Transações processadas:', transactions)

@@ -75,13 +75,13 @@ export function DebugTransactions({ transactions }: DebugTransactionsProps) {
         <div className="bg-green-50 p-3 rounded-lg">
           <div className="text-sm text-green-600 font-medium">Dividendos</div>
           <div className="text-lg font-bold text-green-900">{dividendTransactions.length}</div>
-          <div className="text-sm text-green-700">{formatCurrency(dividendTransactions.reduce((sum, t) => sum + t.total, 0))}</div>
+          <div className="text-sm text-green-700">{formatCurrency(dividendTransactions.reduce((sum, t) => sum + (t.totalOperationValue || t.total || 0), 0))}</div>
         </div>
         
         <div className="bg-purple-50 p-3 rounded-lg">
           <div className="text-sm text-purple-600 font-medium">Juros</div>
           <div className="text-lg font-bold text-purple-900">{interestTransactions.length}</div>
-          <div className="text-sm text-purple-700">{formatCurrency(interestTransactions.reduce((sum, t) => sum + t.total, 0))}</div>
+          <div className="text-sm text-purple-700">{formatCurrency(interestTransactions.reduce((sum, t) => sum + (t.totalOperationValue || t.total || 0), 0))}</div>
         </div>
       </div>
 
@@ -148,10 +148,10 @@ export function DebugTransactions({ transactions }: DebugTransactionsProps) {
             <div key={index} className="bg-gray-50 p-2 rounded text-xs">
               <div className="flex justify-between items-center">
                 <span className="font-medium">{transaction.type}</span>
-                <span>{formatCurrency(transaction.total)}</span>
+                <span>{formatCurrency(transaction.totalOperationValue || transaction.total || 0)}</span>
               </div>
               <div className="text-gray-600">
-                {transaction.quantity} x {formatCurrency(transaction.price)} = {formatCurrency(transaction.quantity * transaction.price)}
+                {transaction.quantity} x {formatCurrency(transaction.unitPrice || transaction.price || 0)} = {formatCurrency(transaction.quantity * (transaction.unitPrice || transaction.price || 0))}
                 {transaction.fees && transaction.fees > 0 && ` + ${formatCurrency(transaction.fees)} (taxas)`}
               </div>
             </div>

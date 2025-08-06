@@ -129,7 +129,7 @@ export function ExportSelector({
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="sm">
+    <Modal isOpen={isOpen} onClose={onClose} size="sm" title="Exportar Dados">
       {content}
     </Modal>
   )
