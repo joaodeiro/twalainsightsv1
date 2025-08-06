@@ -47,8 +47,8 @@ export default function CustodyAccountsPage() {
     setIsLoading(true)
     try {
       await addCustodyAccount({
-        name: data.name,
-        institution: data.institution,
+        brokerName: data.institution,
+        accountNickname: data.name,
         accountNumber: data.accountNumber,
         isActive: true,
       })

@@ -53,8 +53,8 @@ export function PortfolioEvolutionChart({
     
     // Ordenar transações por data
     const sortedTransactions = [...transactions]
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-      .filter(t => new Date(t.date) >= startDate)
+      .sort((a, b) => new Date(a.operationDate || a.date || Date.now()).getTime() - new Date(b.operationDate || b.date || Date.now()).getTime())
+      .filter(t => new Date(t.operationDate || t.date || Date.now()) >= startDate)
 
     if (sortedTransactions.length === 0) return []
 
@@ -65,24 +65,26 @@ export function PortfolioEvolutionChart({
 
     // Ponto inicial
     const firstTransaction = sortedTransactions[0]
-    const firstDate = new Date(firstTransaction.date)
+    const firstDate = new Date(firstTransaction.operationDate || firstTransaction.date || Date.now())
     
     // Processar cada transação
     sortedTransactions.forEach((transaction, index) => {
-      const { type, total, quantity, price } = transaction
+      const { type, total, quantity, price, unitPrice, totalOperationValue } = transaction
+      const effectiveTotal = totalOperationValue || total || 0
       
       if (type === 'BUY') {
-        portfolioValue += total
-        totalInvested += total
+        portfolioValue += effectiveTotal
+        totalInvested += effectiveTotal
       } else if (type === 'SELL') {
-        portfolioValue -= total
-        totalInvested -= (totalInvested / portfolioValue) * total || 0
+        portfolioValue -= effectiveTotal
+        totalInvested -= (totalInvested / portfolioValue) * effectiveTotal || 0
       } else if (type === 'DIVIDEND' || type === 'INTEREST') {
-        portfolioValue += total
+        portfolioValue += effectiveTotal
       }
 
       // Simular variação de mercado baseada no tempo
-      const daysSinceFirst = Math.floor((new Date(transaction.date).getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24))
+      const transactionDate = new Date(transaction.operationDate || transaction.date || Date.now())
+      const daysSinceFirst = Math.floor((transactionDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24))
       const marketMultiplier = 1 + (Math.sin(daysSinceFirst * 0.1) * 0.05) + (daysSinceFirst * 0.001)
       const simulatedValue = portfolioValue * marketMultiplier
 
@@ -90,7 +92,7 @@ export function PortfolioEvolutionChart({
       const returnPercent = totalInvested > 0 ? (returnValue / totalInvested) * 100 : 0
 
       dataPoints.push({
-        date: new Date(transaction.date).toLocaleDateString('pt-AO'),
+        date: transactionDate.toLocaleDateString('pt-AO'),
         value: simulatedValue,
         return: returnValue,
         returnPercent

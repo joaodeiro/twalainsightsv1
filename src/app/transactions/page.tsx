@@ -87,10 +87,10 @@ export default function TransactionsPage() {
 
     try {
       await removeTransaction(transactionId)
-      showToast('Transação excluída com sucesso!', 'success')
+      showToast('success', 'Transação excluída com sucesso!')
     } catch (error) {
       console.error('Erro ao excluir transação:', error)
-      showToast('Erro ao excluir transação. Tente novamente.', 'error')
+      showToast('error', 'Erro ao excluir transação. Tente novamente.')
     }
   }
 
@@ -237,7 +237,7 @@ export default function TransactionsPage() {
                         
                         <div className="flex items-center gap-3">
                           <span className="text-lg font-semibold text-gray-900">
-                            {formatCurrency(transaction.total)}
+                            {formatCurrency(transaction.totalOperationValue || transaction.total || 0)}
                           </span>
                           
                           {/* Botões de ação */}
@@ -269,7 +269,7 @@ export default function TransactionsPage() {
                           {asset?.ticker} - {asset?.name}
                         </p>
                         <p className="text-sm text-gray-600">
-                          {transaction.quantity} ações × {formatCurrency(transaction.price)}
+                          {transaction.quantity} ações × {formatCurrency(transaction.unitPrice || transaction.price || 0)}
                           {transaction.fees && transaction.fees > 0 && (
                             <span className="text-gray-500"> + {formatCurrency(transaction.fees)} taxas</span>
                           )}

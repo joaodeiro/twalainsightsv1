@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react'
 import type { CustodyAccount, Transaction, User } from '@/types'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/contexts/AuthContext'
@@ -99,7 +99,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  const loadFromLocalStorage = () => {
+  const loadFromLocalStorage = useCallback(() => {
     try {
       const stored = localStorage.getItem('twala-app-data')
       if (!stored || !user) return false
@@ -122,7 +122,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       console.error('Erro ao carregar do localStorage:', error)
       return false
     }
-  }
+  }, [user])
 
   const clearLocalData = () => {
     localStorage.removeItem('twala-app-data')
@@ -133,7 +133,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
   // Sincronização com Supabase
-  const syncWithSupabase = async () => {
+  const syncWithSupabase = useCallback(async () => {
     if (!user || !isOnline) {
       console.log('🔄 Sync cancelado: usuário não autenticado ou offline')
       return
@@ -162,7 +162,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         console.log('📱 Fallback: dados carregados do localStorage')
       }
     }
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, isOnline])
 
 
 

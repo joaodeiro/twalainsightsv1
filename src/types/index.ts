@@ -64,9 +64,9 @@ export interface Transaction {
   totalOperationValue: number // valor_total_operacao
   
   // Para compatibilidade (deprecated)
-  price: number
-  date: Date  
-  total: number
+  price?: number
+  date?: Date  
+  total?: number
   
   // Campos expandidos para proventos (conforme documento)
   valuePerUnit?: number     // Para dividendos: valor por ação

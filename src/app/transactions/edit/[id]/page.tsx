@@ -39,7 +39,7 @@ export default function EditTransactionPage() {
       if (foundTransaction) {
         setTransaction(foundTransaction)
       } else {
-        showToast('Transação não encontrada', 'error')
+        showToast('error', 'Transação não encontrada')
         router.push('/transactions')
       }
     }
@@ -66,9 +66,11 @@ export default function EditTransactionPage() {
         type: transaction.type as 'BUY' | 'SELL' | 'DIVIDEND' | 'INTEREST',
         quantity: transaction.quantity,
         price: transaction.price,
-        date: transaction.date instanceof Date 
+        date: transaction.operationDate instanceof Date 
+          ? transaction.operationDate.toISOString().split('T')[0] as any
+          : transaction.date instanceof Date 
           ? transaction.date.toISOString().split('T')[0] as any
-          : new Date(transaction.date).toISOString().split('T')[0] as any,
+          : new Date(transaction.operationDate || transaction.date || Date.now()).toISOString().split('T')[0] as any,
         fees: transaction.fees || 0,
         notes: transaction.notes || ''
       })
@@ -109,11 +111,11 @@ export default function EditTransactionPage() {
         notes: data.notes,
       })
       
-      showToast('Transação atualizada com sucesso!', 'success')
+      showToast('success', 'Transação atualizada com sucesso!')
       router.push('/transactions')
     } catch (error) {
       console.error('Erro ao atualizar transação:', error)
-      showToast('Erro ao atualizar transação. Tente novamente.', 'error')
+      showToast('error', 'Erro ao atualizar transação. Tente novamente.')
     } finally {
       setIsLoading(false)
     }
@@ -129,11 +131,11 @@ export default function EditTransactionPage() {
     setIsDeleting(true)
     try {
       await removeTransaction(transaction.id)
-      showToast('Transação excluída com sucesso!', 'success')
+      showToast('success', 'Transação excluída com sucesso!')
       router.push('/transactions')
     } catch (error) {
       console.error('Erro ao excluir transação:', error)
-      showToast('Erro ao excluir transação. Tente novamente.', 'error')
+      showToast('error', 'Erro ao excluir transação. Tente novamente.')
     } finally {
       setIsDeleting(false)
     }

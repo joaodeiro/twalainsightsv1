@@ -100,7 +100,9 @@ export default function PerformancePage() {
 
     // Consolidar transações por ativo
     filteredTransactions.forEach(transaction => {
-      const { assetId, type, quantity, price, total } = transaction
+      const { assetId, type, quantity, unitPrice, price, total, totalOperationValue } = transaction
+      const effectivePrice = unitPrice || price || 0
+      const effectiveTotal = totalOperationValue || total || (quantity * effectivePrice)
       
       if (!positions.has(assetId)) {
         positions.set(assetId, {
@@ -115,7 +117,7 @@ export default function PerformancePage() {
 
       if (type === 'BUY') {
         position.quantity += quantity
-        position.totalCost += total
+        position.totalCost += effectiveTotal
       } else if (type === 'SELL') {
         position.quantity -= quantity
         // Reduzir custo proporcionalmente
@@ -255,11 +257,11 @@ export default function PerformancePage() {
     // Simular dividendo
     const recentDividends = filteredTransactions.filter(t => 
       t.type === 'DIVIDEND' && 
-      new Date(t.date) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+      new Date(t.operationDate || t.date || Date.now()) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
     )
     
     if (recentDividends.length > 0) {
-      const totalDividends = recentDividends.reduce((sum, t) => sum + t.total, 0)
+      const totalDividends = recentDividends.reduce((sum, t) => sum + (t.totalOperationValue || t.total || 0), 0)
       alertList.push({
         type: 'info',
         message: `💰 Dividendos recebidos: ${formatCurrency(totalDividends)}`
