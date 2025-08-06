@@ -71,9 +71,18 @@ export default function PerformancePage() {
   }, [])
 
   // Usar dados demo se não houver transações reais
-  const effectiveTransactions = transactions.length > 0 ? transactions : (showDemo ? demoTransactions : [])
-  const effectiveCustodyAccounts = custodyAccounts.length > 0 ? custodyAccounts : (showDemo ? demoCustodyAccounts : [])
-  const effectiveAssets = assets.length > 0 ? assets : (showDemo ? demoAssets : [])
+  const effectiveTransactions = useMemo(() => 
+    transactions.length > 0 ? transactions : (showDemo ? demoTransactions : []), 
+    [transactions, showDemo]
+  )
+  const effectiveCustodyAccounts = useMemo(() => 
+    custodyAccounts.length > 0 ? custodyAccounts : (showDemo ? demoCustodyAccounts : []), 
+    [custodyAccounts, showDemo]
+  )
+  const effectiveAssets = useMemo(() => 
+    assets.length > 0 ? assets : (showDemo ? demoAssets : []), 
+    [assets, showDemo]
+  )
 
   // Filtrar transações pela conta selecionada
   const filteredTransactions = useMemo(() => {
@@ -154,7 +163,7 @@ export default function PerformancePage() {
           weight: 0 // Será calculado depois
         }
       })
-  }, [filteredTransactions, assets])
+  }, [filteredTransactions, effectiveAssets])
 
   // Calcular métricas totais da carteira
   const portfolioMetrics = useMemo((): PortfolioMetrics => {

@@ -81,7 +81,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
     }
-  }, [user])
+  }, [user, syncWithSupabase])
 
   // Funções de localStorage
   const saveToLocalStorage = () => {
@@ -494,7 +494,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       clearLocalData()
       setLoading(false)
     }
-  }, [user])
+  }, [user, isOnline, loadFromLocalStorage, syncWithSupabase])
 
   const value: AppContextType = {
     user: user ? {

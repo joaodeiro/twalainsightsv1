@@ -279,7 +279,7 @@ export default function TransactionsPage() {
                         </p>
                         {transaction.notes && (
                           <p className="text-sm text-gray-600 italic">
-                            "{transaction.notes}"
+                            &quot;{transaction.notes}&quot;
                           </p>
                         )}
                       </div>
