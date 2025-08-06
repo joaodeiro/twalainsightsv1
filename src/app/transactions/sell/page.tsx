@@ -70,9 +70,9 @@ export default function SellTransactionPage() {
         assetId: data.assetId,
         type: 'SELL' as const,
         quantity: data.quantity,
-        price: data.price,
-        date: data.date,
-        total: total, // Valor total incluindo taxas (seguindo constraint do banco)
+        unitPrice: data.price,
+        operationDate: data.date,
+        totalOperationValue: total, // Valor total incluindo taxas (seguindo constraint do banco)
         fees: data.fees || 0,
         notes: data.notes,
       }

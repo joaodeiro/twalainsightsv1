@@ -71,9 +71,9 @@ export default function InterestTransactionPage() {
         assetId: data.assetId,
         type: 'INTEREST' as const,
         quantity: data.quantity,
-        price: data.price,
-        date: data.date,
-        total: total,
+        unitPrice: data.price,
+        operationDate: data.date,
+        totalOperationValue: total,
         fees: 0, // Juros não têm taxas
         notes: data.notes,
       }

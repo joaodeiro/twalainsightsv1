@@ -67,9 +67,9 @@ export default function BuyTransactionPage() {
         assetId: data.assetId,
         type: 'BUY',
         quantity: data.quantity,
-        price: data.price,
-        date: data.date,
-        total: total,
+        unitPrice: data.price,
+        operationDate: data.date,
+        totalOperationValue: total,
         fees: data.fees || 0,
         notes: data.notes,
       })

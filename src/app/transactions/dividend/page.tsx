@@ -71,9 +71,9 @@ export default function DividendTransactionPage() {
         assetId: data.assetId,
         type: 'DIVIDEND' as const,
         quantity: data.quantity,
-        price: data.price,
-        date: data.date,
-        total: total,
+        unitPrice: data.price,
+        operationDate: data.date,
+        totalOperationValue: total,
         fees: 0, // Dividendos não têm taxas
         notes: data.notes,
       }

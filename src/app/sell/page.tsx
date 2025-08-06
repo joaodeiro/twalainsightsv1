@@ -104,11 +104,11 @@ export default function SellPage() {
         assetId: data.assetId,
         type: 'SELL',
         quantity: data.quantity,
-        price: data.price,
-        date: data.date,
-        total: data.quantity * data.price,
-        broker: data.broker,
+        unitPrice: data.price,
+        operationDate: data.date,
+        totalOperationValue: data.quantity * data.price,
         fees: data.fees || 0,
+        broker: data.broker,
         notes: data.notes,
       })
 
