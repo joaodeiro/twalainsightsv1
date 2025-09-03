@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/Card'
 import { Header } from '@/components/ui/Header'
+import { TrendingUp } from 'lucide-react'
 
 export default function IndicatorsPage() {
   return (
@@ -59,9 +60,7 @@ export default function IndicatorsPage() {
           </h2>
           <div className="text-center py-8">
             <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-              </svg>
+              <TrendingUp className="w-8 h-8 text-gray-400" />
             </div>
             <p className="text-gray-500 mb-2">
               Nenhum indicador disponível
@@ -74,4 +73,4 @@ export default function IndicatorsPage() {
       </div>
     </div>
   )
-} 
+}

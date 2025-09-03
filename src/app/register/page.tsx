@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { registerSchema, type RegisterFormData } from '@/lib/schemas'
 import { useAuth } from '@/contexts/AuthContext'
+import { CheckCircle } from 'lucide-react'
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -76,13 +77,11 @@ export default function RegisterPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+              <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <Card>
           <div className="text-center">
             <div className="w-16 h-16 bg-success-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
+              <CheckCircle className="w-8 h-8 text-success-600" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Conta criada com sucesso!
@@ -100,13 +99,13 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-8 px-3 sm:py-12 sm:px-6 lg:px-8">
+          <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-8 px-3 sm:py-12 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6 sm:space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
             Criar nova conta
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
             Ou{' '}
             <Link href="/login" className="text-primary-600 hover:text-primary-500">
               entre na sua conta existente
@@ -123,12 +122,12 @@ export default function RegisterPage() {
             )}
 
             <div className="w-full">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Nome completo
               </label>
               <input
                 type="text"
-                placeholder="Seu nome completo"
+                placeholder="Teu nome completo"
                 className="block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
                 style={{ color: 'black', backgroundColor: 'white' }}
                 {...register('name')}
@@ -139,12 +138,12 @@ export default function RegisterPage() {
             </div>
 
             <div className="w-full">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Email
               </label>
               <input
                 type="email"
-                placeholder="seu@email.com"
+                placeholder="teu@email.com"
                 className="block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
                 style={{ color: 'black', backgroundColor: 'white' }}
                 {...register('email')}
@@ -155,7 +154,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="w-full">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Senha
               </label>
               <input
@@ -171,7 +170,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="w-full">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Confirmar senha
               </label>
               <input
@@ -198,4 +197,4 @@ export default function RegisterPage() {
       </div>
     </div>
   )
-} 
+}

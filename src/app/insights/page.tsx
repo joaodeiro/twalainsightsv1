@@ -74,7 +74,7 @@ export default function InsightsPage() {
             Insights & Notícias
           </h1>
           <p className="text-gray-600">
-            Fique por dentro das últimas notícias e análises do mercado financeiro angolano.
+            Fica por dentro das últimas notícias e análises do mercado financeiro angolano.
           </p>
         </div>
 
@@ -87,7 +87,7 @@ export default function InsightsPage() {
               </div>
               <div>
                 <div className="text-sm font-medium text-gray-900">Notícias</div>
-                <div className="text-xs text-gray-500">Últimas novidades</div>
+                <div className="text-xs text-gray-500">Últimas atualizações</div>
               </div>
             </div>
           </Card>

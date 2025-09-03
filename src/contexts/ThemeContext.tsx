@@ -28,9 +28,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (mounted) {
-      const root = document.documentElement
-      root.classList.remove('light', 'dark')
-      root.classList.add(theme)
+      const html = document.documentElement
+      html.classList.remove('light', 'dark')
+      html.classList.add(theme)
       localStorage.setItem('theme', theme)
     }
   }, [theme, mounted])

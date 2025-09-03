@@ -14,6 +14,7 @@ import { useApp } from '@/contexts/AppContext'
 import { useAuth } from '@/contexts/AuthContext'
 import { Header } from '@/components/ui/Header'
 import type { Asset } from '@/types'
+import { Calculator } from 'lucide-react'
 
 export default function BuyPage() {
   const { custodyAccounts, addTransaction } = useApp()
@@ -118,10 +119,10 @@ export default function BuyPage() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Registrar Compra
+            Registar Compra
           </h1>
           <p className="text-gray-600">
-            Registre uma nova compra de ativo na sua carteira.
+            Regista uma nova compra de ativo na tua carteira.
           </p>
         </div>
 
@@ -135,7 +136,7 @@ export default function BuyPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <Select
                 label="Conta de Custódia"
-                placeholder="Selecione uma conta"
+                placeholder="Escolhe uma conta"
                 options={custodyAccounts.map(account => ({
                   value: account.id,
                   label: `${account.name} - ${account.institution}`,
@@ -146,10 +147,10 @@ export default function BuyPage() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Buscar Ativo
+                  Procurar Ativo
                 </label>
                 <Input
-                  placeholder="Digite o ticker ou nome do ativo"
+                  placeholder="Escreve o ticker ou nome do ativo"
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
                 />
@@ -157,7 +158,7 @@ export default function BuyPage() {
 
               <Select
                 label="Ativo"
-                placeholder="Selecione um ativo"
+                placeholder="Escolhe um ativo"
                 options={filteredAssets.map(asset => ({
                   value: asset.id,
                   label: `${asset.ticker} - ${asset.name}`,
@@ -221,7 +222,7 @@ export default function BuyPage() {
                 loading={isLoading}
                 className="w-full"
               >
-                Registrar Compra
+                Registar Compra
               </Button>
             </form>
           </Card>
@@ -269,9 +270,7 @@ export default function BuyPage() {
               {!selectedAsset && !watchedQuantity && (
                 <div className="text-center py-8">
                   <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
+                    <Calculator className="w-6 h-6 text-gray-400" />
                   </div>
                   <p className="text-gray-500">
                     Preencha os dados da operação para ver o resumo
@@ -284,4 +283,4 @@ export default function BuyPage() {
       </div>
     </div>
   )
-} 
+}

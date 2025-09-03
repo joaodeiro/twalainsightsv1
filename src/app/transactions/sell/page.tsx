@@ -14,6 +14,7 @@ import { transactionSchema, type TransactionFormData } from '@/lib/schemas'
 import { getAssets, searchAssets } from '@/lib/assets'
 import { useApp } from '@/contexts/AppContext'
 import { Header } from '@/components/ui/Header'
+import { ChevronLeft } from 'lucide-react'
 import type { Asset } from '@/types'
 
 export default function SellTransactionPage() {
@@ -105,7 +106,7 @@ export default function SellTransactionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
       <div className="max-w-2xl mx-auto px-4 py-8">
         <div className="mb-8">
@@ -114,9 +115,7 @@ export default function SellTransactionPage() {
               onClick={() => router.back()}
               className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
+              <ChevronLeft className="w-6 h-6" />
             </button>
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
@@ -198,7 +197,7 @@ export default function SellTransactionPage() {
             />
 
             {/* Resumo da Transação */}
-            <div className="bg-gray-50 rounded-lg p-4">
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
               <h3 className="text-sm font-medium text-gray-900 mb-3">
                 Resumo da Venda
               </h3>
@@ -255,4 +254,4 @@ export default function SellTransactionPage() {
       <ToastContainer />
     </div>
   )
-} 
+}

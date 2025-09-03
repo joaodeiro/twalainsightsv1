@@ -1,7 +1,7 @@
 'use client'
 
 import { useTheme } from '@/contexts/ThemeContext'
-import { SunIcon, MoonIcon } from '@heroicons/react/24/outline'
+import { Sun, Moon } from 'lucide-react'
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
@@ -21,11 +21,11 @@ export function ThemeToggle() {
         }`}
       >
         {theme === 'light' ? (
-          <SunIcon className="h-4 w-4 text-yellow-500 mx-auto mt-1" />
+          <Sun className="h-4 w-4 text-yellow-500 mx-auto mt-1" />
         ) : (
-          <MoonIcon className="h-4 w-4 text-blue-500 mx-auto mt-1" />
+          <Moon className="h-4 w-4 text-blue-500 mx-auto mt-1" />
         )}
       </span>
     </button>
   )
-} 
+}

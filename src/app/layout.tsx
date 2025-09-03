@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: 'Twala Insights - Mercado Financeiro Angolano',
   description: 'Plataforma para simplificar o mundo dos investimentos no mercado angolano',
   keywords: 'investimentos, BODIVA, Angola, mercado financeiro, carteira',
+  icons: {
+    icon: '/favicon.png',
+  },
 }
 
 export default function RootLayout({
@@ -24,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt">
+    <html lang="pt" className="light">
       <body className={inter.className}>
         <ErrorBoundary>
           <ThemeProvider>

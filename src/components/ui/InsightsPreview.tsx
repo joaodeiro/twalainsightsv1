@@ -143,7 +143,7 @@ export function InsightsPreview() {
       </div>
       
       {/* Coming Soon Features */}
-      <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+              <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
         <h3 className="text-sm font-medium text-gray-900 mb-3">
           Em Breve
         </h3>

@@ -2,8 +2,26 @@
 
 import Link from 'next/link'
 import { useAuth } from '@/contexts/AuthContext'
+import { useTheme } from '@/contexts/ThemeContext'
 import { useEffect, useState } from 'react'
-// import { ThemeToggle } from './ThemeToggle' // Temporariamente desabilitado para deploy
+import { ThemeToggle } from './ThemeToggle'
+import { UserMenu } from './UserMenu'
+import Image from 'next/image'
+
+// Wrapper para ThemeToggle que só renderiza quando montado
+function SafeThemeToggle() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return <div className="w-14 h-8" /> // Placeholder com mesmo tamanho
+  }
+
+  return <ThemeToggle />
+}
 
 export function Header() {
   const [mounted, setMounted] = useState(false)
@@ -19,13 +37,19 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-primary-600">
-                Twala Insights
+              <Link href="/" className="flex items-center">
+                <Image 
+                  src="/assets/orginal preto.svg"
+                  alt="Twala Insights" 
+                  width={120} 
+                  height={120}
+                  className="w-30 h-30"
+                />
               </Link>
             </div>
             <nav className="hidden md:flex items-center space-x-8">
               <div className="flex items-center space-x-4">
-                {/* <ThemeToggle /> */}
+                <SafeThemeToggle />
                 <Link href="/login" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                   Entrar
                 </Link>
@@ -40,9 +64,10 @@ export function Header() {
     )
   }
 
-  // Componente interno que usa useAuth
+  // Componente interno que usa useAuth e useTheme
   function AuthenticatedHeader() {
     const { user, signOut } = useAuth()
+    const { theme } = useTheme()
 
     const handleSignOut = async () => {
       await signOut()
@@ -53,8 +78,14 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-primary-600">
-                Twala Insights
+              <Link href="/" className="flex items-center">
+                <Image 
+                  src={theme === 'dark' ? "/assets/orginal branco.svg" : "/assets/orginal preto.svg"}
+                  alt="Twala Insights" 
+                  width={120} 
+                  height={120}
+                  className="w-30 h-30"
+                />
               </Link>
             </div>
             <nav className="hidden md:flex items-center space-x-8">
@@ -73,22 +104,14 @@ export function Header() {
                     Insights
                   </Link>
                   <div className="flex items-center space-x-4">
-                    {/* <ThemeToggle /> */}
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
-                      Olá, {user.user_metadata?.name || 'Usuário'}
-                    </span>
-                    <button
-                      onClick={handleSignOut}
-                      className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                    >
-                      Sair
-                    </button>
+                    <SafeThemeToggle />
+                    <UserMenu />
                   </div>
                 </>
               ) : (
                 <>
                   <div className="flex items-center space-x-4">
-                    {/* <ThemeToggle /> */}
+                    <SafeThemeToggle />
                     <Link href="/login" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                       Entrar
                     </Link>
@@ -106,4 +129,4 @@ export function Header() {
   }
 
   return <AuthenticatedHeader />
-} 
+}

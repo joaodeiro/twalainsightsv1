@@ -23,7 +23,7 @@ const tabs = [
     icon: <TrendingUp className="w-6 h-6" />,
   },
       {
-      name: 'Performance',
+      name: 'Desempenho',
       href: '/performance',
       icon: <BarChart3 className="w-6 h-6" />,
     },
@@ -74,4 +74,4 @@ export function TabBar() {
       </div>
     </div>
   )
-} 
+}

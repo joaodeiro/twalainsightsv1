@@ -14,6 +14,7 @@ import { transactionSchema, type TransactionFormData } from '@/lib/schemas'
 import { getAssets, searchAssets } from '@/lib/assets'
 import { useApp } from '@/contexts/AppContext'
 import { Header } from '@/components/ui/Header'
+import { ChevronLeft } from 'lucide-react'
 import type { Asset } from '@/types'
 
 export default function BuyTransactionPage() {
@@ -97,24 +98,22 @@ export default function BuyTransactionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 md:pb-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pb-20 md:pb-8">
       <Header />
       <div className="max-w-2xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <div className="mb-8">
           <div className="flex items-center space-x-3 mb-4">
             <button
               onClick={() => router.back()}
-              className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+              className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
+              <ChevronLeft className="w-6 h-6" />
             </button>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                 Registrar Compra
               </h1>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-300">
                 Registre a compra de um ativo em sua carteira.
               </p>
             </div>
@@ -190,31 +189,31 @@ export default function BuyTransactionPage() {
             />
 
             {/* Resumo da Transação */}
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h3 className="text-sm font-medium text-gray-900 mb-3">
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">
                 Resumo da Compra
               </h3>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Quantidade × Preço:</span>
+                  <span className="text-gray-600 dark:text-gray-400">Quantidade × Preço:</span>
                   <span className="font-medium">
                     {watchedQuantity} × {formatCurrency(watchedPrice)}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Subtotal:</span>
+                  <span className="text-gray-600 dark:text-gray-400">Subtotal:</span>
                   <span className="font-medium">
                     {formatCurrency(watchedQuantity * watchedPrice)}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Taxas:</span>
+                  <span className="text-gray-600 dark:text-gray-400">Taxas:</span>
                   <span className="font-medium">
                     {formatCurrency(watchedFees || 0)}
                   </span>
                 </div>
                 <div className="border-t pt-2 flex justify-between text-base font-semibold">
-                  <span className="text-gray-900">Total:</span>
+                  <span className="text-gray-900 dark:text-gray-100">Total:</span>
                   <span className="text-success-600">
                     {formatCurrency(total)}
                   </span>
@@ -247,4 +246,4 @@ export default function BuyTransactionPage() {
       <ToastContainer />
     </div>
   )
-} 
+}

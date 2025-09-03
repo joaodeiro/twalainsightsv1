@@ -3,8 +3,6 @@
 import { Transaction, CustodyAccount, Asset } from '@/types'
 
 export const demoTransactions: Transaction[] = [
-  // Comentado temporariamente para deploy
-  /*
   {
     id: 'demo-1',
     userId: 'demo-user',
@@ -96,13 +94,29 @@ export const demoTransactions: Transaction[] = [
     fees: 3000,
     custodyAccountId: 'demo-account-2',
     notes: 'Entrada em NOS'
+  },
+  // Dividendos recentes para os alertas
+  {
+    id: 'demo-8',
+    userId: 'demo-user',
+    operationDate: new Date(),
+    type: 'DIVIDEND',
+    assetId: 'BFA',
+    quantity: 100,
+    unitPrice: 125,
+    totalOperationValue: 12500,
+    fees: 0,
+    custodyAccountId: 'demo-account-1',
+    notes: 'Dividendos BFA recentes',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    date: new Date(),
+    price: 125,
+    total: 12500,
   }
-  */
 ]
 
 export const demoCustodyAccounts: CustodyAccount[] = [
-  // Comentado temporariamente para deploy
-  /*
   {
     id: 'demo-account-1',
     name: 'Banco de Investimento Africano',
@@ -117,12 +131,9 @@ export const demoCustodyAccounts: CustodyAccount[] = [
     accountNumber: '987654321000',
     createdAt: '2024-01-01T00:00:00Z'
   }
-  */
 ]
 
 export const demoAssets: Asset[] = [
-  // Comentado temporariamente para deploy
-  /*
   {
     id: 'BIA',
     name: 'Banco de Investimento Africano',
@@ -171,5 +182,4 @@ export const demoAssets: Asset[] = [
     sector: 'Financeiro',
     description: 'Banco de Investimento Comercial'
   }
-  */
 ]

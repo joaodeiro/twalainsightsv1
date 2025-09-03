@@ -47,7 +47,7 @@ export function PrerequisiteDebug() {
           <div className="p-2 bg-gray-50 rounded">
             <strong>📡 Carregamento:</strong>
             <div className="ml-2">
-              <div>Loading: {loading ? '⏳ Sim' : '✅ Não'}</div>
+              <div>A carregar: {loading ? '⏳ Sim' : '✅ Não'}</div>
             </div>
           </div>
 

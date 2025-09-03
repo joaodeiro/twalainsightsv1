@@ -1,7 +1,7 @@
 // Sistema de Exportação - Twala Insights
 
 import jsPDF from 'jspdf'
-import 'jspdf-autotable'
+import autoTable from 'jspdf-autotable'
 import type { Transaction, Asset, CustodyAccount } from '@/types'
 import { calculatePortfolioStats } from './portfolio'
 import { getAssets } from './assets'
@@ -229,7 +229,7 @@ export async function exportTransactionsToPDF(
   })
   
   // Adicionar tabela
-  doc.autoTable({
+  autoTable(doc, {
     startY: 70,
     head: [['Data', 'Tipo', 'Ticker', 'Qtd', 'Preço', 'Total', 'Conta']],
     body: tableData,
@@ -309,7 +309,7 @@ export async function exportPortfolioToPDF(
   })
   
   // Adicionar tabela
-  doc.autoTable({
+  autoTable(doc, {
     startY: 105,
     head: [['Ticker', 'Qtd', 'Custo Médio', 'Investido', 'Preço Atual', 'Valor Atual', 'L/P', 'Retorno %']],
     body: tableData,
@@ -340,7 +340,7 @@ function getTransactionTypeLabel(type: string): string {
   switch (type) {
     case 'BUY': return 'Compra'
     case 'SELL': return 'Venda'
-    case 'DIVIDEND': return 'Dividendo'
+    case 'DIVIDEND': return 'Dividendos'
     case 'INTEREST': return 'Juros'
     default: return type
   }

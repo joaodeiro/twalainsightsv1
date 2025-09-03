@@ -81,8 +81,8 @@ export function usePrerequisites() {
           hasBeenShown: custody.hasBeenShown 
         })
         
-        // Se não tem contas mas não mostrou ainda
-        if (!hasCustodyAccounts && !custody.hasBeenShown) {
+        // Se não tem contas mas não mostrou ainda, E não tem transações também
+        if (!hasCustodyAccounts && !custody.hasBeenShown && !hasTransactions) {
           console.log('🏦 Showing custody modal')
           custody.isOpen = true
           custody.hasBeenShown = true

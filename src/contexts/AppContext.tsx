@@ -184,8 +184,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
           .from('custody_accounts')
           .insert([{
             user_id: user.id,
-            name: account.name,
-            institution: account.institution,
+            name: account.accountNickname || account.name,
+            institution: account.brokerName || account.institution,
             account_number: account.accountNumber,
             is_active: account.isActive,
           }])
@@ -295,12 +295,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
     // Garantir que a data seja uma string no formato YYYY-MM-DD
     let dateString: string
+    const dateToProcess = transaction.operationDate || transaction.date
     try {
-      if (transaction.date instanceof Date) {
-        dateString = transaction.date.toISOString().split('T')[0]
-      } else if (typeof transaction.date === 'string') {
+      if (dateToProcess instanceof Date) {
+        dateString = dateToProcess.toISOString().split('T')[0]
+      } else if (typeof dateToProcess === 'string') {
         // Se já é uma string, verificar se está no formato correto
-        const dateStr = transaction.date as string
+        const dateStr = dateToProcess as string
         if (dateStr.includes('T')) {
           dateString = dateStr.split('T')[0]
         } else {
@@ -308,14 +309,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
         }
       } else {
         // Se for um timestamp ou outro formato, tentar converter
-        const date = new Date(transaction.date as any)
+        const date = new Date(dateToProcess as any)
         if (isNaN(date.getTime())) {
           throw new Error('Data inválida')
         }
         dateString = date.toISOString().split('T')[0]
       }
     } catch (error) {
-      console.error('Erro ao processar data:', error, 'Data recebida:', transaction.date)
+      console.error('Erro ao processar data:', error, 'Data recebida:', dateToProcess)
       throw new Error('Data inválida fornecida')
     }
 
@@ -327,9 +328,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         asset_id: transaction.assetId,
         type: transaction.type,
         quantity: transaction.quantity,
-        price: transaction.price,
+        price: transaction.unitPrice || transaction.price,
         date: dateString,
-        total: transaction.total,
+        total: transaction.totalOperationValue || transaction.total,
         broker: transaction.broker,
         fees: transaction.fees || 0,
         notes: transaction.notes,
@@ -553,4 +554,4 @@ export function useApp() {
     throw new Error('useApp deve ser usado dentro de um AppProvider')
   }
   return context
-} 
+}

@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
+import { Building2, ChevronRight } from 'lucide-react'
 import type { CustodyAccount } from '@/types'
 
 interface CustodyAccountsSummaryProps {
@@ -38,9 +39,7 @@ export function CustodyAccountsSummary({ accounts, maxDisplay = 3 }: CustodyAcco
         </div>
         <div className="text-center py-6">
           <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-            </svg>
+            <Building2 className="w-6 h-6 text-gray-400" />
           </div>
           <p className="text-gray-500 mb-2">
             Nenhuma conta cadastrada
@@ -78,17 +77,17 @@ export function CustodyAccountsSummary({ accounts, maxDisplay = 3 }: CustodyAcco
         {displayedAccounts.map((account) => (
           <div 
             key={account.id}
-            className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+            className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
             onClick={() => router.push('/custody-accounts')}
           >
             <div className="flex-1">
-              <h3 className="font-medium text-gray-900">
+              <h3 className="font-medium text-gray-900 dark:text-gray-100">
                 {account.name}
               </h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 {account.institution}
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
                 Conta: {account.accountNumber}
               </p>
             </div>
@@ -96,9 +95,7 @@ export function CustodyAccountsSummary({ accounts, maxDisplay = 3 }: CustodyAcco
               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-success-100 text-success-800">
                 Ativa
               </span>
-              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+              <ChevronRight className="w-4 h-4 text-gray-400" />
             </div>
           </div>
         ))}
@@ -117,4 +114,4 @@ export function CustodyAccountsSummary({ accounts, maxDisplay = 3 }: CustodyAcco
       </div>
     </Card>
   )
-} 
+}

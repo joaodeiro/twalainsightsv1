@@ -6,12 +6,12 @@ interface LoadingPageProps {
 }
 
 export function LoadingPage({ 
-  text = 'Carregando página...', 
+  text = 'A carregar página...', 
   fullScreen = true 
 }: LoadingPageProps) {
   return (
     <div className={`
-      flex items-center justify-center bg-gray-50 
+      flex items-center justify-center bg-gray-50 dark:bg-gray-900 
       ${fullScreen ? 'min-h-screen' : 'min-h-[400px]'}
     `}>
       <div className="text-center space-y-4">

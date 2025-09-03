@@ -68,13 +68,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-8 px-3 sm:py-12 sm:px-6 lg:px-8">
+          <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-8 px-3 sm:py-12 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6 sm:space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
             Entrar na sua conta
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
             Ou{' '}
             <Link href="/register" className="text-primary-600 hover:text-primary-500">
               crie uma nova conta
@@ -91,7 +91,7 @@ export default function LoginPage() {
             )}
 
             <div className="w-full">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Email
               </label>
               <input
@@ -107,7 +107,7 @@ export default function LoginPage() {
             </div>
 
             <div className="w-full">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Senha
               </label>
               <input
@@ -143,4 +143,4 @@ export default function LoginPage() {
       </div>
     </div>
   )
-} 
+}

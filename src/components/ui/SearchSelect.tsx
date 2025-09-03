@@ -99,7 +99,7 @@ export function SearchSelect({
   return (
     <div className={clsx('relative', className)} ref={containerRef}>
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           {label}
         </label>
       )}
@@ -114,9 +114,9 @@ export function SearchSelect({
           onKeyDown={handleKeyDown}
           disabled={disabled}
           className={clsx(
-            'w-full px-3 py-2 border rounded-lg bg-white text-left focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors',
-            error ? 'border-error-300 focus:ring-error-500 focus:border-error-500' : 'border-gray-300',
-            disabled ? 'bg-gray-50 cursor-not-allowed' : 'cursor-text'
+            'w-full px-3 py-2 border rounded-lg bg-white dark:bg-gray-800 dark:text-gray-100 text-left focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors',
+            error ? 'border-error-300 focus:ring-error-500 focus:border-error-500' : 'border-gray-300 dark:border-gray-600',
+            disabled ? 'bg-gray-50 dark:bg-gray-700 cursor-not-allowed' : 'cursor-text'
           )}
         />
         
@@ -126,7 +126,7 @@ export function SearchSelect({
             className={clsx(
               'w-5 h-5 transition-transform',
               isOpen ? 'rotate-180' : '',
-              error ? 'text-error-400' : 'text-gray-400'
+              error ? 'text-error-400' : 'text-gray-400 dark:text-gray-500'
             )} 
           />
         </div>
@@ -134,7 +134,7 @@ export function SearchSelect({
 
       {/* Dropdown */}
       {isOpen && !disabled && (
-        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-auto">
+        <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg max-h-60 overflow-auto">
           {filteredOptions.length > 0 ? (
             filteredOptions.map((option) => (
               <button
@@ -142,16 +142,16 @@ export function SearchSelect({
                 type="button"
                 onClick={() => handleSelect(option)}
                 className={clsx(
-                  'w-full px-3 py-2 text-left hover:bg-gray-50 focus:bg-gray-50 focus:outline-none transition-colors',
-                  selectedOption?.value === option.value ? 'bg-primary-50 text-primary-700' : 'text-gray-900'
+                  'w-full px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700 focus:bg-gray-50 dark:focus:bg-gray-700 focus:outline-none transition-colors',
+                  selectedOption?.value === option.value ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400' : 'text-gray-900 dark:text-gray-100'
                 )}
               >
                 {option.label}
               </button>
             ))
           ) : (
-            <div className="px-3 py-2 text-gray-500 text-sm">
-              Nenhuma opção encontrada
+            <div className="px-3 py-2 text-gray-500 dark:text-gray-400 text-sm">
+              Nenhuma opção foi encontrada meu camba
             </div>
           )}
         </div>
@@ -165,4 +165,4 @@ export function SearchSelect({
       )}
     </div>
   )
-} 
+}

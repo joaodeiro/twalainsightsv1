@@ -61,18 +61,18 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
         
         {/* Modal */}
         <div className={clsx(
-          'relative w-full bg-white rounded-lg shadow-xl transform transition-all',
+          'relative w-full bg-white dark:bg-gray-800 rounded-lg shadow-xl transform transition-all',
           'max-h-[90vh] overflow-hidden flex flex-col', // Altura máxima em mobile
           sizeClasses[size]
         )}>
           {/* Header */}
-          <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 flex-shrink-0">
-            <h3 className="text-lg font-semibold text-gray-900 truncate mr-4">
+          <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 truncate mr-4">
               {title}
             </h3>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0"
+              className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 transition-colors flex-shrink-0"
             >
               <X className="w-6 h-6" />
             </button>

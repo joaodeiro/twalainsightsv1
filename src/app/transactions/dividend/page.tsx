@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { SearchSelect } from '@/components/ui/SearchSelect'
 import { useToast } from '@/components/ui/Toast'
+import { ChevronLeft } from 'lucide-react'
 import { transactionSchema, type TransactionFormData } from '@/lib/schemas'
 import { getAssets } from '@/lib/assets'
 import { useApp } from '@/contexts/AppContext'
@@ -115,9 +116,7 @@ export default function DividendTransactionPage() {
               onClick={() => router.back()}
               className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
+              <ChevronLeft className="w-6 h-6" />
             </button>
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
@@ -224,4 +223,4 @@ export default function DividendTransactionPage() {
       <ToastContainer />
     </div>
   )
-} 
+}

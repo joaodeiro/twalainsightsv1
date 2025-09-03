@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { custodyAccountSchema, type CustodyAccountFormData } from '@/lib/schemas'
 import { useApp } from '@/contexts/AppContext'
 import { Header } from '@/components/ui/Header'
+import { Building2 } from 'lucide-react'
 
 export default function CustodyAccountsPage() {
   const { custodyAccounts, addCustodyAccount, removeCustodyAccount } = useApp()
@@ -47,8 +48,8 @@ export default function CustodyAccountsPage() {
     setIsLoading(true)
     try {
       await addCustodyAccount({
-        brokerName: data.institution,
         accountNickname: data.name,
+        brokerName: data.institution,
         accountNumber: data.accountNumber,
         isActive: true,
       })
@@ -157,9 +158,7 @@ export default function CustodyAccountsPage() {
               <Card>
                 <div className="text-center py-8">
                   <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
+                    <Building2 className="w-6 h-6 text-gray-400" />
                   </div>
                   <p className="text-gray-500">
                     Nenhuma conta cadastrada ainda.
@@ -207,4 +206,4 @@ export default function CustodyAccountsPage() {
       </div>
     </div>
   )
-} 
+}

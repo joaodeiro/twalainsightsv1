@@ -23,28 +23,28 @@ const transactionTypes: TransactionTypeOption[] = [
   {
     type: 'BUY',
     label: 'Compra de Ativo',
-    description: 'Registrar compra de ações ou outros ativos',
+    description: 'Registar compra de acções ou outros ativos',
     icon: <Plus className="w-8 h-8" />,
     color: 'bg-success-50 border-success-200 text-success-700 hover:bg-success-100'
   },
   {
     type: 'SELL',
     label: 'Venda de Ativo',
-    description: 'Registrar venda de ações ou outros ativos',
+    description: 'Registar venda de acções ou outros ativos',
     icon: <Minus className="w-8 h-8" />,
     color: 'bg-error-50 border-error-200 text-error-700 hover:bg-error-100'
   },
   {
     type: 'DIVIDEND',
     label: 'Dividendos',
-    description: 'Registrar recebimento de dividendos',
+    description: 'Registar recebimento de dividendos',
     icon: <DollarSign className="w-8 h-8" />,
     color: 'bg-warning-50 border-warning-200 text-warning-700 hover:bg-warning-100'
   },
   {
     type: 'INTEREST',
     label: 'Juros',
-    description: 'Registrar recebimento de juros',
+    description: 'Registar recebimento de juros',
     icon: <TrendingUp className="w-8 h-8" />,
     color: 'bg-info-50 border-info-200 text-info-700 hover:bg-info-100'
   }
@@ -76,10 +76,10 @@ export function TransactionTypeSelector({ onSelect, onClose }: TransactionTypeSe
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
             <div>
               <h3 className="text-xl font-semibold text-gray-900">
-                Tipo de Transação
+                Tipo de Operação
               </h3>
               <p className="text-sm text-gray-600 mt-1">
-                Selecione o tipo de operação que deseja registrar
+                Escolhe o tipo de operação que queres registar
               </p>
             </div>
             <button
@@ -142,4 +142,4 @@ export function TransactionTypeSelector({ onSelect, onClose }: TransactionTypeSe
       </div>
     </div>
   )
-} 
+}

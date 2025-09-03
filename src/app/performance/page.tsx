@@ -277,7 +277,7 @@ export default function PerformancePage() {
 
   if (effectiveTransactions.length === 0) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <div className="mb-6 sm:mb-8 text-center sm:text-left">
@@ -321,7 +321,7 @@ export default function PerformancePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header da Performance */}
@@ -536,7 +536,7 @@ export default function PerformancePage() {
 
               <div className="overflow-x-auto -mx-4 sm:mx-0">
                 <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-gray-50 dark:bg-gray-800">
                     <tr>
                       <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Ativo
@@ -566,7 +566,7 @@ export default function PerformancePage() {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {positionsWithWeights.map((position) => (
-                      <tr key={position.assetId} className="hover:bg-gray-50 cursor-pointer">
+                      <tr key={position.assetId} className="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
                         <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                           <div>
                             <div className="font-medium text-gray-900 text-sm">{position.assetName}</div>
@@ -616,6 +616,46 @@ export default function PerformancePage() {
 
           {/* Coluna Lateral (1/3) */}
           <div className="lg:col-span-1 space-y-4 lg:space-y-8">
+            {/* Alertas e Mensagens */}
+            {alerts.length > 0 && (
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  Alertas e Notificações
+                </h3>
+                <div className="space-y-3">
+                  {alerts.map((alert, index) => (
+                    <div
+                      key={index}
+                      className={`p-3 rounded-lg border-l-4 ${
+                        alert.type === 'success'
+                          ? 'bg-green-50 border-green-400 text-green-700'
+                          : alert.type === 'warning'
+                          ? 'bg-yellow-50 border-yellow-400 text-yellow-700'
+                          : alert.type === 'info'
+                          ? 'bg-blue-50 border-blue-400 text-blue-700'
+                          : 'bg-gray-50 border-gray-400 text-gray-700'
+                      }`}
+                    >
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0 mr-2">
+                          {alert.type === 'success' && (
+                            <TrendingUp className="w-4 h-4 mt-0.5" />
+                          )}
+                          {alert.type === 'warning' && (
+                            <AlertTriangle className="w-4 h-4 mt-0.5" />
+                          )}
+                          {alert.type === 'info' && (
+                            <Target className="w-4 h-4 mt-0.5" />
+                          )}
+                        </div>
+                        <p className="text-sm">{alert.message}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
+
             {/* Distribuição da Carteira */}
             <Card className="p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-6">

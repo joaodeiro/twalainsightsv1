@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Plus, Calendar, Building, Download } from 'lucide-react'
+import { Plus, Calendar, Building, Download, X, Building2 } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { TransactionTypeSelector, type TransactionType } from '@/components/ui/TransactionTypeSelector'
@@ -66,14 +66,14 @@ export default function PortfolioPage() {
     try {
       if (type === 'CSV') {
         await exportPortfolioToCSV(transactions, custodyAccounts)
-        showToast('success', 'Carteira exportada em CSV com sucesso!')
+        showToast('success', 'Carteira exportada em CSV com sucesso, meu!')
       } else {
         await exportPortfolioToPDF(transactions, custodyAccounts)
-        showToast('success', 'Carteira exportada em PDF com sucesso!')
+        showToast('success', 'Carteira exportada em PDF com sucesso, meu!')
       }
     } catch (error) {
       console.error('Erro ao exportar:', error)
-      showToast('error', 'Erro ao exportar carteira. Tente novamente.')
+      showToast('error', 'Eish, deu erro ao exportar a carteira. Tenta outra vez, né.')
     }
   }
 
@@ -82,15 +82,15 @@ export default function PortfolioPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
              <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8 text-center sm:text-left">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 px-2 sm:px-0">
-            Carteira
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2 px-2 sm:px-0">
+            A Minha Carteira
           </h1>
-          <p className="text-sm sm:text-base text-gray-600 px-2 sm:px-0">
-            Visualize e gerencie seus investimentos.
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 px-2 sm:px-0">
+            Aqui podes ver e gerir os teus investimentos, meu.
           </p>
         </div>
 
@@ -103,7 +103,7 @@ export default function PortfolioPage() {
               className="flex items-center justify-center space-x-2 w-full"
             >
               <Plus className="w-5 h-5" />
-              <span>Nova Transação</span>
+              <span>Nova Operação</span>
             </Button>
             
             <div className="grid grid-cols-2 gap-3">
@@ -135,7 +135,7 @@ export default function PortfolioPage() {
                 className="flex items-center space-x-2"
               >
                 <Plus className="w-5 h-5" />
-                <span>Nova Transação</span>
+                <span>Nova Operação</span>
               </Button>
               
               <Button 
@@ -144,7 +144,7 @@ export default function PortfolioPage() {
                 className="flex items-center space-x-2"
               >
                 <Calendar className="w-5 h-5" />
-                <span>Histórico de Transações</span>
+                <span>Histórico de Operações</span>
               </Button>
             </div>
             
@@ -199,28 +199,24 @@ export default function PortfolioPage() {
         <div className="fixed inset-0 z-50 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4">
             <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" onClick={() => setShowCustodyModal(false)} />
-            <div className="relative w-full max-w-md bg-white rounded-lg shadow-xl transform transition-all">
-              <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">Conta de Custódia Necessária</h3>
-                <button onClick={() => setShowCustodyModal(false)} className="text-gray-400 hover:text-gray-600 transition-colors">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+            <div className="relative w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-xl transform transition-all">
+              <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Precisas de uma Conta de Custódia</h3>
+                <button onClick={() => setShowCustodyModal(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                  <X className="w-6 h-6" />
                 </button>
               </div>
               <div className="p-6">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-primary-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
+                    <Building2 className="w-8 h-8 text-primary-600" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                     Primeiro Passo: Conta de Custódia
                   </h3>
-                  <p className="text-gray-600 mb-6">
-                    Para começar a registrar transações, você precisa cadastrar pelo menos uma conta de custódia.
-                    Isso nos ajuda a organizar seus investimentos por instituição.
+                  <p className="text-gray-600 dark:text-gray-300 mb-6">
+                    Para começares a registar operações, precisas cadastrar pelo menos uma conta de custódia, meu.
+                    Isso ajuda-nos a organizar os teus investimentos por instituição.
                   </p>
                   <div className="space-y-3">
                     <button
@@ -236,7 +232,7 @@ export default function PortfolioPage() {
                       onClick={() => setShowCustodyModal(false)}
                       className="w-full btn-secondary"
                     >
-                      Depois
+                      Mais tarde
                     </button>
                   </div>
                 </div>
@@ -260,8 +256,8 @@ export default function PortfolioPage() {
         onClose={() => setShowExportSelector(false)}
         onSelect={handleExportSelect}
         title="Exportar Carteira"
-        description="Escolha o formato para exportar sua carteira de investimentos:"
+        description="Escolhe o formato para exportar a tua carteira de investimentos:"
       />
     </div>
   )
-} 
+}
